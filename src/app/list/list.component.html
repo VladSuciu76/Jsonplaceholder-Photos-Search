@@ -1,0 +1,39 @@
+<div class="container">
+  <div id="main" class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Json Placeholder Photo Search</h3>
+    </div>
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="search-section col-md-6 pull-left">
+          <div class="input-group">
+            <label for="search">Search Photo:</label>
+            <input type="text" id="search" class="form-control" [(ngModel)]="searchedVal"  (change)="filterSearch()" placeholder="Enter photo title">
+          </div>
+        </div>
+
+        <div class="pager col-md-6 pull-right">
+           <div class="btn-group pull-right" role="group">
+            <button type="button" [disabled]="prevDisable" (click)="prevPage()" class="btn btn-default glyphicon glyphicon-chevron-left"></button>
+            <button type="button" [disabled]="nextDisable" (click)="nextPage()" class="btn btn-default glyphicon glyphicon-chevron-right"></button>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="items-list row">
+        <div *ngFor="let item of listItems | slice: paginateFrom:paginateTo | search: 'title':searchedVal" class="col-sm-6 col-md-5ths">
+          <div class="thumbnail">
+            <img src="{{item.thumbnailUrl}}" alt="{{item.thumbnailUrl}}">
+            <div class="caption">
+              <p class="title">{{item.title | summary}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
